@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+    height: 100vh;
+}
+
+/* Alinhamento central vertical e horizontal */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Alinhamento central vertical e esquerda horizontal */
+.center-left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}

@@ -1,0 +1,51 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 border-right">
+
+            <div class="row">
+                <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-3">
+                    <div class="card bg-light mb-3">
+                        <div class="card-body p-2">
+                          <p class="card-text text-justify small">
+                              Pesquise o posicionamento de seus veículos por placa, data ou ambos.
+                          </p>
+                        </div>
+                      </div>
+                </div>
+                <div class="col col-12">
+                    <span class="small text-secondary">Placa do veículo</span>
+                </div>
+                <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="input-group mb-3">
+                        <select class="custom-select fs-12" [(ngModel)]="placa" id="inputGroupSelect02">
+                            <option [ngValue]="placa" selected>Selcione o veículo</option>
+                            <option *ngFor="let placa of placas" [ngValue]="placa">{{ placa }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col col-12">
+                    <span class="small text-secondary">Data</span>
+                </div>
+                <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="input-group mb-3">
+                        <input type="date" class="form-control" [(ngModel)]="data" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    </div>                    
+                </div>
+                <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-3">
+                    <button class="btn btn  -success btn-sm btn-block">Pesquisar</button>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9">
+
+            {{ data }}<br>
+            {{ placa }}<br>
+            {{ dataFormat.transform(data) }}
+        </div>
+
+    </div>
+
+</div>
