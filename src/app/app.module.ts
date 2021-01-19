@@ -11,6 +11,7 @@ import { PosicaoService } from './service/posicao.service';
 import { DataFormatPipe } from './pipe/data-format.pipe';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FormsModule } from '@angular/forms';
+import { PoisService } from './service/pois.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { FormsModule } from '@angular/forms';
   ],
   providers: [
     DataFormatPipe,
-    PosicaoService
+    PosicaoService,
+    PoisService
   ],
   bootstrap: [AppComponent]
 })

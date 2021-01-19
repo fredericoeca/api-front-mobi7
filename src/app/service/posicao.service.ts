@@ -19,7 +19,7 @@ export class PosicaoService {
   }
 
   getPosicao(placa?: string, data?: Date): Observable<Array<Posicao>> {
-    let parameter = placa && data ? `?placa= ${ placa }&data=${ data }` : placa ? `?placa=${ placa }` : data ? `?data=${ data }` : `` ;
+    let parameter = placa && data ? `?placa=${ placa }&data=${ data }` : placa ? `?placa=${ placa }` : data ? `?data=${ data }` : `` ;
     return this.http.get<Array<Posicao>>(`${this.URL_API}/posicao${ parameter }`);
   }  
 
