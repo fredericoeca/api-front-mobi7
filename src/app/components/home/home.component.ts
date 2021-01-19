@@ -127,8 +127,8 @@ export class HomeComponent implements OnInit {
     
     let diasStr = `${dias} dia${ dias !== 1 ? `s` : `` }`;
     let horasStr = `${horas} hora${ horas !== 1 ? `s` : `` }`;
-    let minutosStr = `${minutos} minuto${ minutos !== 1 ? `s` : `` }`
-    let segundosStr = `${segundos} segundo${ segundos !== 1 ? `s` : `` }`
+    let minutosStr = `${minutos} minuto${ minutos !== 1 ? `s` : `` }`;
+    let segundosStr = `${segundos} segundo${ segundos !== 1 ? `s` : `` }`;
     
     return `${ dias !== 0 ? `${diasStr}, ` : `` }
             ${ horas !== 0 ? `${horasStr}, ` : `` }
