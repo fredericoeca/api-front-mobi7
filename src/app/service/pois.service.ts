@@ -18,7 +18,4 @@ export class PoisService {
     return this.http.get<Array<Poi>>(`${this.URL_API}/pois`);
   }
 
-  getPoiByName(poiNome: string): Observable<Poi> {
-      return this.http.get<Poi>(`${this.URL_API}/pois/${poiNome}`);
-  }
 }

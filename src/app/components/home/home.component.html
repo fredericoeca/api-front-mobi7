@@ -41,77 +41,84 @@
         </div>
         <div class="col col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9">
 
-            <div class="card border-light mt-3" *ngFor="let carro of posicoesPorCarro">
-                <div class="card-header"><span class="text-secondary">Veículo:&nbsp;</span>{{ carro.placa }}</div>
-                <div class="card-body">
+            <div *ngFor="let carro of posicoesPorCarro">
+                <div class="card border-light mt-3" *ngIf="filterMonitoramentoPorCarro(carro.placa).length !== 0">
+                    <div class="card-header"><span class="text-secondary">Veículo:&nbsp;</span>{{ carro.placa }}</div>
+                    <div class="card-body">
 
-                    <div *ngFor="let monitoramento of filterMonitoramentoPorCarro(carro.placa); let i = index">
+                        <div *ngFor="let monitoramento of filterMonitoramentoPorCarro(carro.placa); let i = index">
 
-                        <div class="row mb-1">
-                            <div class="col col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
-                                <span class="small text-secondary">Posição</span>
+                            <div class="row mb-1">
+                                <div class="col col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                                    <span class="small text-secondary">Posição</span>
+                                </div>
+                                <div class="col col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                                    {{ monitoramento.posicao }}
+                                </div>
                             </div>
-                            <div class="col col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
-                                {{ monitoramento.posicao }}
+                            <div class="row mb-1">
+                                <div class="col col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                                    <span class="small text-secondary">Início</span>
+                                </div>
+                                <div class="col col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                                    {{ monitoramento.inicio | date:'dd/MM/yyyy HH:mm:ss':'UTC' }}        
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mb-1">
-                            <div class="col col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
-                                <span class="small text-secondary">Início</span>
+                            <div class="row mb-1">
+                                <div class="col col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                                    <span class="small text-secondary">Final</span>
+                                </div>
+                                <div class="col col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                                    {{ monitoramento.final | date:'dd/MM/yyyy HH:mm:ss':'UTC' }}        
+                                </div>
                             </div>
-                            <div class="col col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
-                                {{ monitoramento.inicio | date:'dd/MM/yyyy HH:mm:ss':'UTC' }}        
+                            <div class="row">
+                                <div class="col col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                                    <span class="small text-secondary">Período</span>
+                                </div>
+                                <div class="col col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7">
+                                    {{ monitoramento.periodo }}
+                                </div>
+                                <div class="col col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 text-right">
+                                    <button class="btn btn-outline-success btn-sm" data-toggle="collapse" [attr.data-target]="'#reg_' + i + '_' + carro.placa">Ver Registros</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mb-1">
-                            <div class="col col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
-                                <span class="small text-secondary">Final</span>
-                            </div>
-                            <div class="col col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
-                                {{ monitoramento.final | date:'dd/MM/yyyy HH:mm:ss':'UTC' }}        
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
-                                <span class="small text-secondary">Período</span>
-                            </div>
-                            <div class="col col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7">
-                                {{ monitoramento.periodo }}
-                            </div>
-                            <div class="col col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 text-right">
-                                <button class="btn btn-outline-success btn-sm" data-toggle="collapse" [attr.data-target]="'#reg_' + i + '_' + carro.placa">Ver Registros</button>
-                            </div>
-                        </div>
-
-                        <hr />
-                
-                        <div class="collapse" [attr.id]="'reg_' + i + '_' + carro.placa">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Momento</th>
-                                    <th scope="col">Velocidade</th>
-                                    <th scope="col">Posição</th>
-                                    <th scope="col">Ignição</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr *ngFor="let posicao of monitoramento.posicoes">
-                                    <th scope="row">{{ posicao.data | date:'dd/MM/yyyy HH:mm:ss' }}</th>
-                                    <td>{{ posicao.velocidade }} Km/h</td>
-                                    <td><a [href]="linkMaps(posicao.latitude,posicao.longitude)" target="_blank">
-                                        ( {{ posicao.latitude}}, {{ posicao.longitude }} )</a></td>
-                                    <td *ngIf="posicao.ignicao">Ligada</td>
-                                    <td *ngIf="!posicao.ignicao">Desligada</td>
-                                </tr>
-                                </tbody>
-                            </table>
 
                             <hr />
+                    
+                            <div class="collapse" [attr.id]="'reg_' + i + '_' + carro.placa">
+
+                                <div class="div-scroll">
+
+                                    <table class="table table-hover small">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Momento</th>
+                                            <th scope="col">Velocidade</th>
+                                            <th scope="col">Posição</th>
+                                            <th scope="col">Ignição</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let posicao of monitoramento.posicoes">
+                                            <td>{{ posicao.data | date:'dd/MM/yyyy HH:mm:ss':'UTC' }}</td>
+                                            <td>{{ posicao.velocidade }} Km/h</td>
+                                            <td><a [href]="linkMaps(posicao.latitude,posicao.longitude)" target="_blank">
+                                                ( {{ posicao.latitude}}, {{ posicao.longitude }} )</a></td>
+                                            <td *ngIf="posicao.ignicao">Ligada</td>
+                                            <td *ngIf="!posicao.ignicao">Desligada</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <hr />
+                                
+                            </div>
+                            
                         </div>
-                        
+                    
                     </div>
-                
                 </div>
             </div>
 

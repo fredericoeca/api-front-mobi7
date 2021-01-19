@@ -17,3 +17,14 @@ html, body {
     justify-content: flex-start;
     align-items: center;
 }
+
+/* Borda header da tabela */ 
+.table thead th {
+    border: 1px solid #fff;
+    background-color: #f1f1f1;
+}
+
+.table th {
+    border-top: none;
+}
+
